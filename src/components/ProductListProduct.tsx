@@ -1,26 +1,26 @@
-import { interpolate, useCurrentFrame } from 'remotion'
+import { interpolate, useCurrentFrame } from "remotion";
 
-import { Image } from './Image'
-import { Rank } from './Rank'
+import { Image } from "./Image";
+import { Rank } from "./Rank";
 
 export const ProductListProduct = ({ product, transitionStart }) => {
-  const frame = useCurrentFrame()
+  const frame = useCurrentFrame();
 
   const opacity =
     frame < 3
       ? 1
       : interpolate(frame, [transitionStart, transitionStart + 10], [0, 1], {
-          extrapolateLeft: 'clamp',
-          extrapolateRight: 'clamp',
-        })
+          extrapolateLeft: "clamp",
+          extrapolateRight: "clamp",
+        });
 
   const translate =
     frame < 3
       ? 0
       : interpolate(frame, [transitionStart, transitionStart + 10], [20, 0], {
-          extrapolateLeft: 'clamp',
-          extrapolateRight: 'clamp',
-        })
+          extrapolateLeft: "clamp",
+          extrapolateRight: "clamp",
+        });
 
   return (
     <div
@@ -32,18 +32,18 @@ export const ProductListProduct = ({ product, transitionStart }) => {
         <Image src={product.thumbnail} className="h-14 w-14" />
 
         <div>
-          <h2 className="text-3xl font-medium leading-8 text-gray-800 line-clamp-2">
+          <h2 className="line-clamp-2 text-3xl leading-8 font-medium text-gray-800">
             {product.name}
           </h2>
-          <h3 className="text-2xl leading-7 text-gray-700 line-clamp-2">
+          <h3 className="line-clamp-2 text-2xl leading-7 text-gray-700">
             {product.tagline}
           </h3>
         </div>
       </div>
-      <div className="flex flex-col rounded border-2 border-gray-200 py-1 px-2 text-center text-gray-800">
+      <div className="flex flex-col rounded border-2 border-gray-200 px-2 py-1 text-center text-gray-800">
         <p className="text-xl font-semibold">▲</p>
         <p className="text-xl font-semibold">{product.votesCount}</p>
       </div>
     </div>
-  )
-}
+  );
+};

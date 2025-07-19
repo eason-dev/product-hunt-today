@@ -1,15 +1,15 @@
-import { spring, useCurrentFrame, useVideoConfig } from 'remotion'
+import { spring, useCurrentFrame, useVideoConfig } from "remotion";
 
-import { Image } from './Image'
+import { Image } from "./Image";
 
 export const ImagesCarousel = ({ images }) => {
-  const frame = useCurrentFrame()
-  const { fps } = useVideoConfig()
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
 
   const springConfig = {
     mass: 0.3,
     stiffness: 150,
-  }
+  };
 
   const translate1 = spring({
     fps,
@@ -17,7 +17,7 @@ export const ImagesCarousel = ({ images }) => {
     to: 100,
     frame: frame - 50,
     config: springConfig,
-  })
+  });
 
   const translate2 = spring({
     fps,
@@ -25,7 +25,7 @@ export const ImagesCarousel = ({ images }) => {
     to: 200,
     frame: frame - 110,
     config: springConfig,
-  })
+  });
 
   return (
     <div className="aspect-w-16 aspect-h-9 relative overflow-hidden">
@@ -44,5 +44,5 @@ export const ImagesCarousel = ({ images }) => {
         ))}
       </div>
     </div>
-  )
-}
+  );
+};
