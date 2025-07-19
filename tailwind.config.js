@@ -7,8 +7,5 @@ export default {
       },
     },
   },
-  plugins: [
-    '@tailwindcss/line-clamp',
-    '@tailwindcss/aspect-ratio',
-  ],
+  plugins: [],
 }
