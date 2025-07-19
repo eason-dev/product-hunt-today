@@ -14,34 +14,36 @@ Product Hunt Today is a Twitter bot that automatically:
 
 ### Development
 ```bash
-yarn install              # Install dependencies
-yarn start               # Preview video in browser (Remotion dev server)
-yarn lint                # Run ESLint
-yarn lint:fix            # Fix ESLint issues
-yarn test                # Run linting + TypeScript type checking
+pnpm install              # Install dependencies
+pnpm start               # Preview video in browser (Remotion dev server)
+pnpm lint                # Run ESLint
+pnpm lint:fix            # Fix ESLint issues
+pnpm test                # Run linting + TypeScript type checking
 ```
 
 ### Building & Deployment
 ```bash
-yarn fetch               # Fetch Product Hunt data → saves to data/today.json
-yarn build               # Render video → outputs to out/video.mp4
-yarn post-tweet          # Post video to Twitter
+pnpm fetch               # Fetch Product Hunt data → saves to data/today.json
+pnpm build               # Render video → outputs to out/video.mp4
+pnpm post-tweet          # Post video to Twitter
 ```
 
 ### Single Test/Component Development
 ```bash
 # To work on specific video components:
-yarn start               # Opens Remotion preview at localhost:3000
+pnpm start               # Opens Remotion preview at localhost:3001
 # Navigate to specific compositions in the preview UI
 ```
 
 ## Architecture Overview
 
 ### Core Technologies
-- **Remotion** (v2.6.11): React-based video generation framework
-- **React** (v17.0.2) with TypeScript
-- **Tailwind CSS** (v2): Utility-first styling
-- **zx**: Modern shell scripting for automation
+- **Remotion** (v4.0.324): React-based video generation framework
+- **React** (v19.1.0) with TypeScript (v5.8.3)
+- **Tailwind CSS** (v4.1.11): Modern utility-first CSS framework
+- **zx** (v8.7.1): Modern shell scripting for automation
+- **pnpm** (v10.13.1): Fast, disk space efficient package manager
+- **Node.js** (v22 LTS): JavaScript runtime
 
 ### Key Directories
 - `/src`: Video components and rendering logic
@@ -81,7 +83,10 @@ The `tweet-daily-video.yml` workflow:
 4. Archives generated video as artifact
 
 ### Important Notes
-- The project uses Yarn (not npm) as the package manager
-- Remotion v2.6.11 is an older version - be aware of API differences if consulting docs
+- The project uses pnpm as the package manager
+- Uses ESM modules throughout (`"type": "module"` in package.json)
+- ESLint uses flat config format (eslint.config.js)
+- Tailwind CSS v4 uses @import syntax and CSS-based configuration
 - Video rendering timeout is set to 1000000ms due to complex animations
 - The bot posts to @ProductHunToday Twitter account
+- GitHub Actions workflow uses Node.js version from .nvmrc file

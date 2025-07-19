@@ -6,13 +6,16 @@ A Twitter bot [@ProductHunToday](https://twitter.com/ProductHunToday) that tweet
 
 ## Tech stack
 
-- [Remotion](https://www.remotion.dev/): Generate short video in React!
+- [Remotion v4](https://www.remotion.dev/): Generate short video in React!
+- [React v19](https://react.dev/): Latest React with improved performance
+- [TypeScript v5](https://www.typescriptlang.org/): Type-safe development
+- [Tailwind CSS v4](https://tailwindcss.com/): Modern utility-first CSS framework
 - [Product Hunt API 2.0 (GraphQL)](https://api.producthunt.com/v2/docs): Fetch trending products
-- [Twitter API](https://developer.twitter.com/en/docs/twitter-api): Tweet post thread with video
-- [Tailwind CSS](https://tailwindcss.com/): UI of video content
-- [Github Actions](https://github.com/features/actions): Run scheduled job everyday (fetch data from Product Hunt -> generate video -> post Twitter)
-- [google/zx](https://github.com/google/zx): Write modern shell script in JavaScript
-- Node.js: v16.14.0
+- [Twitter API v2](https://developer.twitter.com/en/docs/twitter-api): Tweet post thread with video
+- [GitHub Actions](https://github.com/features/actions): Run scheduled job everyday (fetch data from Product Hunt -> generate video -> post Twitter)
+- [google/zx v8](https://github.com/google/zx): Write modern shell script in JavaScript
+- [pnpm v10](https://pnpm.io/): Fast, disk space efficient package manager
+- Node.js: v22 LTS
 
 ## Sample tweet
 
@@ -24,8 +27,11 @@ https://twitter.com/ProductHunToday/status/1506186218714849287
 
 ### Install dependencies
 
+First, ensure you have Node.js v22 LTS installed (or use `nvm` with the `.nvmrc` file):
+
 ```console
-yarn install
+nvm use  # If using nvm
+pnpm install
 ```
 
 ### Setup environment variables
@@ -45,7 +51,7 @@ TWITTER_ACCESS_TOKEN_SECRET="<your-key>"
 This will call Product Hunt API, and store result in `<ProjectRoot>/data/today.json`
 
 ```console
-yarn fetch
+pnpm fetch
 ```
 
 ### Start preview
@@ -53,7 +59,7 @@ yarn fetch
 This will open browser to preview video
 
 ```console
-yarn start
+pnpm start
 ```
 
 ### Render video
@@ -61,13 +67,21 @@ yarn start
 This will store generated video in `<ProjectRoot>/out/video.mp4`
 
 ```console
-yarn build
+pnpm build
 ```
 
 ### Post to Twitter
 
 ```console
-yarn post-tweet
+pnpm post-tweet
+```
+
+### Run tests
+
+```console
+pnpm test  # Run linting and type checking
+pnpm lint  # Run ESLint only
+pnpm lint:fix  # Fix ESLint issues
 ```
 
 ## Contribute

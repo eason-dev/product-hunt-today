@@ -1,7 +1,7 @@
 {
-	"name": "remotion-template",
-	"version": "1.0.0",
-	"description": "My Remotion video",
+	"name": "product-hunt-today",
+	"version": "2.0.0",
+	"description": "Twitter bot that posts daily trending Product Hunt products as videos",
 	"type": "module",
 	"packageManager": "pnpm@10.13.1",
 	"engines": {
