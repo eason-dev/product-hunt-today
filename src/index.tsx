@@ -1,7 +1,7 @@
-import './style.css'
+import "./style.css";
 
-import { registerRoot } from 'remotion'
+import { registerRoot } from "remotion";
 
-import { RemotionVideo } from './Video'
+import { RemotionVideo } from "./Video";
 
-registerRoot(RemotionVideo)
+registerRoot(RemotionVideo);

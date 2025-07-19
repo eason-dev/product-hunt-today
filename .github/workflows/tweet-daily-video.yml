@@ -17,15 +17,26 @@ jobs:
     name: Tweet Daily Video
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@main
-      - uses: actions/setup-node@main
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.13.1
       - run: sudo apt update
       - run: sudo apt install ffmpeg
-      - run: mkdir data
-      - run: yarn install
-      - run: yarn fetch
-      - run: yarn build
-      - run: yarn post-tweet
+      - run: mkdir -p data
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm run fetch
+      - name: Verify data file exists
+        run: |
+          if [ ! -f data/today.json ]; then
+            echo "Error: data/today.json not found after fetch"
+            exit 1
+          fi
+      - run: pnpm build
+      - run: pnpm post-tweet
       - uses: actions/upload-artifact@v4
         with:
           name: video.mp4

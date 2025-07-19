@@ -3,13 +3,17 @@
 // eslint-disable-next-line import/no-unresolved
 import 'zx/globals'
 
-require('dotenv').config()
+import 'dotenv/config'
+import path from 'path'
+import { fileURLToPath } from 'url'
+import { TwitterApi } from 'twitter-api-v2'
+import { formatInTimeZone } from 'date-fns-tz'
+import fs from 'fs'
 
-const path = require('path')
-const { TwitterApi } = require('twitter-api-v2')
-const { formatInTimeZone } = require('date-fns-tz')
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = path.dirname(__filename)
 
-const data = require('../data/today.json')
+const data = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../data/today.json'), 'utf-8'))
 
 const keycap = '\uFE0F\u20E3'
 const RANK_TO_EMOJI = [

@@ -1,17 +1,17 @@
-import { Sequence, useVideoConfig } from 'remotion'
+import { Sequence, useVideoConfig } from "remotion";
 
-import { BaseBackground } from './components/BaseBackground'
-import { ContentWrapper } from './components/ContentWrapper'
-import { ProductDetail } from './components/ProductDetail'
-import { ProductList } from './components/ProductList'
-import useProductHuntData from './hooks/useProductHuntData'
+import { BaseBackground } from "./components/BaseBackground";
+import { ContentWrapper } from "./components/ContentWrapper";
+import { ProductDetail } from "./components/ProductDetail";
+import { ProductList } from "./components/ProductList";
+import useProductHuntData from "./hooks/useProductHuntData";
 
 export const ProductHuntToday = () => {
-  const videoConfig = useVideoConfig()
-  const { products, date } = useProductHuntData()
+  const videoConfig = useVideoConfig();
+  const { products, date } = useProductHuntData();
 
   return (
-    <div style={{ flex: 1, backgroundColor: '#da5630' }}>
+    <div style={{ flex: 1, backgroundColor: "#da5630" }}>
       {/* Background */}
       <Sequence from={0} durationInFrames={videoConfig.durationInFrames}>
         <BaseBackground date={date} />
@@ -38,5 +38,5 @@ export const ProductHuntToday = () => {
         </Sequence>
       ))}
     </div>
-  )
-}
+  );
+};

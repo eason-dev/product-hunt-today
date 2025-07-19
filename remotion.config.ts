@@ -1,10 +1,10 @@
-import { Config } from 'remotion'
+import { Config } from '@remotion/cli/config'
 
-Config.Rendering.setImageFormat('jpeg')
-Config.Output.setOverwriteOutput(true)
+Config.setVideoImageFormat('jpeg')
+Config.setOverwriteOutput(true)
 
 // https://www.remotion.dev/docs/webpack#enable-tailwindcss-support
-Config.Bundling.overrideWebpackConfig((currentConfiguration) => {
+Config.overrideWebpackConfig((currentConfiguration) => {
   return {
     ...currentConfiguration,
     module: {
@@ -33,7 +33,7 @@ Config.Bundling.overrideWebpackConfig((currentConfiguration) => {
                 postcssOptions: {
                   plugins: [
                     'postcss-preset-env',
-                    'tailwindcss',
+                    '@tailwindcss/postcss',
                     'autoprefixer',
                   ],
                 },

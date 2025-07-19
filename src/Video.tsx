@@ -1,6 +1,6 @@
-import { Composition } from 'remotion'
+import { Composition } from "remotion";
 
-import { ProductHuntToday } from './ProductHuntToday'
+import { ProductHuntToday } from "./ProductHuntToday";
 
 export const RemotionVideo = () => {
   return (
@@ -14,5 +14,5 @@ export const RemotionVideo = () => {
         height={720}
       />
     </>
-  )
-}
+  );
+};

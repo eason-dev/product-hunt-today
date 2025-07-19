@@ -1,20 +1,20 @@
-import { interpolate, useCurrentFrame, useVideoConfig } from 'remotion'
+import { interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 
-import { ProductDetailProduct } from './ProductDetailProduct'
+import { ProductDetailProduct } from "./ProductDetailProduct";
 
 export const ProductDetail = ({ product }) => {
-  const frame = useCurrentFrame()
-  const videoConfig = useVideoConfig()
+  const frame = useCurrentFrame();
+  const videoConfig = useVideoConfig();
 
   const opacity = interpolate(
     frame,
     [videoConfig.durationInFrames - 8, videoConfig.durationInFrames],
     [1, 0],
     {
-      extrapolateLeft: 'clamp',
-      extrapolateRight: 'clamp',
-    }
-  )
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    },
+  );
 
   return (
     <div
@@ -23,5 +23,5 @@ export const ProductDetail = ({ product }) => {
     >
       <ProductDetailProduct product={product} />
     </div>
-  )
-}
+  );
+};

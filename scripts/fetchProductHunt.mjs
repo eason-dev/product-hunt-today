@@ -119,5 +119,5 @@ console.log(result)
 
 fs.writeFileSync(
   path.resolve(__dirname, '../data/today.json'),
-  prettier.format(JSON.stringify(result), { parser: 'json' })
+  await prettier.format(JSON.stringify(result), { parser: 'json' })
 )
