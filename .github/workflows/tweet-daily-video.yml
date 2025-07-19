@@ -28,7 +28,13 @@ jobs:
       - run: sudo apt install ffmpeg
       - run: mkdir -p data
       - run: pnpm install --frozen-lockfile
-      - run: pnpm fetch
+      - run: pnpm run fetch
+      - name: Verify data file exists
+        run: |
+          if [ ! -f data/today.json ]; then
+            echo "Error: data/today.json not found after fetch"
+            exit 1
+          fi
       - run: pnpm build
       - run: pnpm post-tweet
       - uses: actions/upload-artifact@v4
