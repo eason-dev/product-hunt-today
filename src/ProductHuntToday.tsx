@@ -8,13 +8,15 @@ import useProductHuntData from "./hooks/useProductHuntData";
 
 export const ProductHuntToday = () => {
   const videoConfig = useVideoConfig();
-  const { products, date } = useProductHuntData();
+  const { products, date, isMiddayPost } = useProductHuntData();
 
   return (
-    <div style={{ flex: 1, backgroundColor: "#da5630" }}>
+    <div
+      style={{ flex: 1, backgroundColor: isMiddayPost ? "#cc4125" : "#da5630" }}
+    >
       {/* Background */}
       <Sequence from={0} durationInFrames={videoConfig.durationInFrames}>
-        <BaseBackground date={date} />
+        <BaseBackground date={date} isMiddayPost={isMiddayPost} />
       </Sequence>
 
       {/* ProductList */}

@@ -13,7 +13,9 @@ import fs from 'fs'
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
-const data = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../data/today.json'), 'utf-8'))
+const isMiddayPost = process.env.MIDDAY_POST === 'true'
+const dataFile = isMiddayPost ? 'midday.json' : 'yesterday.json'
+const data = JSON.parse(fs.readFileSync(path.resolve(__dirname, `../data/${dataFile}`), 'utf-8'))
 
 const keycap = '\uFE0F\u20E3'
 const RANK_TO_EMOJI = [
@@ -47,7 +49,7 @@ const composeProduct = (product) => {
 // =============================================================================
 
 const _composeMainContentLong = () => {
-  const { products, date } = data
+  const { products, date, isMiddayPost = false } = data
   const formattedDate = formatInTimeZone(
     new Date(date),
     'America/Los_Angeles',
@@ -58,7 +60,15 @@ const _composeMainContentLong = () => {
     .map((product) => composeProduct(product))
     .join('\n')
 
-  let content = `🔥 Top 5 on Product Hunt yesterday
+  let content = isMiddayPost 
+    ? `🚀 Top 5 Trending on Product Hunt RIGHT NOW
+⏰ ${formatInTimeZone(new Date(), 'America/Los_Angeles', 'h:mm a zzz')} #ProductHunt
+
+${formattedProducts}
+
+🧵 Detail & links in the thread 👇
+`
+    : `🔥 Top 5 on Product Hunt yesterday
 📅 ${formattedDate} #ProductHunt
 
 ${formattedProducts}
@@ -70,7 +80,7 @@ ${formattedProducts}
 }
 
 const _composeMainContentShort = () => {
-  const { products, date } = data
+  const { products, date, isMiddayPost = false } = data
   const formattedDate = formatInTimeZone(
     new Date(date),
     'America/Los_Angeles',
@@ -81,7 +91,12 @@ const _composeMainContentShort = () => {
     .map((product) => composeProduct(product))
     .join('\n')
 
-  let content = `🔥 Top 5 on Product Hunt yesterday
+  let content = isMiddayPost
+    ? `🚀 Top 5 Trending on Product Hunt NOW
+⏰ ${formatInTimeZone(new Date(), 'America/Los_Angeles', 'h:mm a')} #ProductHunt
+
+${formattedProducts}`
+    : `🔥 Top 5 on Product Hunt yesterday
 📅 ${formattedDate} #ProductHunt
 
 ${formattedProducts}`
@@ -137,8 +152,9 @@ async function run() {
     accessSecret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
   })
 
+  const videoFile = isMiddayPost ? 'midday-video.mp4' : 'yesterday-video.mp4'
   const mediaIdVideo = await client.v1.uploadMedia(
-    path.resolve(__dirname, '../out/video.mp4'),
+    path.resolve(__dirname, `../out/${videoFile}`),
     { type: 'longmp4' }
   )
 

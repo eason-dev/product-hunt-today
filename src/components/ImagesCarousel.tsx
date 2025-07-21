@@ -28,7 +28,7 @@ export const ImagesCarousel = ({ images }) => {
   });
 
   return (
-    <div className="relative overflow-hidden aspect-[16/9]">
+    <div className="relative aspect-[16/9] overflow-hidden">
       <div
         className="flex h-full w-full"
         style={{

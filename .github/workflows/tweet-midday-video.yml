@@ -1,9 +1,9 @@
-name: Tweet Daily Video
+name: Tweet Midday Video
 
 on:
   workflow_dispatch:
   schedule:
-    - cron: "5 8 * * *" # Daily (00:05 every day in Pacific Timezone)
+    - cron: "0 20 * * *" # Daily at 12:00 PM Pacific Time (20:00 UTC)
 
 env:
   REACT_APP_PRODUCT_HUNT_API_KEY: ${{ secrets.REACT_APP_PRODUCT_HUNT_API_KEY }}
@@ -14,7 +14,7 @@ env:
 
 jobs:
   render:
-    name: Tweet Daily Video
+    name: Tweet Midday Video
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -28,16 +28,16 @@ jobs:
       - run: sudo apt install ffmpeg
       - run: mkdir -p data
       - run: pnpm install --frozen-lockfile
-      - run: pnpm run fetch:yesterday
+      - run: pnpm run fetch:midday
       - name: Verify data file exists
         run: |
-          if [ ! -f data/yesterday.json ]; then
-            echo "Error: data/yesterday.json not found after fetch"
+          if [ ! -f data/midday.json ]; then
+            echo "Error: data/midday.json not found after fetch"
             exit 1
           fi
-      - run: pnpm run build:yesterday
-      - run: pnpm post-tweet
+      - run: pnpm run build:midday
+      - run: pnpm run post-tweet:midday
       - uses: actions/upload-artifact@v4
         with:
-          name: yesterday-video.mp4
-          path: out/yesterday-video.mp4
+          name: midday-video.mp4
+          path: out/midday-video.mp4

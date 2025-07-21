@@ -1,14 +1,16 @@
 import { formatInTimeZone } from "date-fns-tz";
 
-export const BaseBackground = ({ date }) => {
+export const BaseBackground = ({ date, isMiddayPost = false }) => {
   return (
     <div className="relative h-full w-full p-8">
       <div className="relative flex h-full w-full flex-col rounded-xl bg-white p-4">
         <h1
           className="text-center text-4xl font-bold"
-          style={{ color: "#da5630" }}
+          style={{ color: isMiddayPost ? "#cc4125" : "#da5630" }}
         >
-          Top 5 on Product Hunt yesterday
+          {isMiddayPost
+            ? "Top 5 Trending on Product Hunt Now"
+            : "Top 5 on Product Hunt yesterday"}
         </h1>
         <h2 className="text-center text-2xl text-gray-400">
           {formatInTimeZone(
