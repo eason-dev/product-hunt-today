@@ -1,4 +1,5 @@
 import { Config } from '@remotion/cli/config'
+import { webpack } from '@remotion/bundler'
 
 Config.setVideoImageFormat('jpeg')
 Config.setOverwriteOutput(true)
@@ -7,6 +8,12 @@ Config.setOverwriteOutput(true)
 Config.overrideWebpackConfig((currentConfiguration) => {
   return {
     ...currentConfiguration,
+    plugins: [
+      ...(currentConfiguration.plugins || []),
+      new webpack.DefinePlugin({
+        'process.env.MIDDAY_POST': JSON.stringify(process.env.MIDDAY_POST),
+      }),
+    ],
     module: {
       ...currentConfiguration.module,
       rules: [
