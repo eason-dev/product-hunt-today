@@ -42,8 +42,9 @@ function rankToMedalEmoji(rank) {
   return ['', '🥇', '🥈', '🥉'][rank]
 }
 
-const composeProduct = (product) => {
-  return `${product.rank}. ${product.name} 🔼 ${product.votesCount}`
+const composeProduct = (product, includeTwitterHandle = true) => {
+  const twitterHandle = includeTwitterHandle && product.user?.twitterUsername ? ` by @${product.user.twitterUsername}` : ''
+  return `${product.rank}. ${product.name}${twitterHandle} 🔼 ${product.votesCount}`
 }
 
 // =============================================================================
@@ -57,7 +58,7 @@ const _composeMainContentLong = () => {
   )
 
   const formattedProducts = products
-    .map((product) => composeProduct(product))
+    .map((product) => composeProduct(product, true))
     .join('\n')
 
   let content = isMiddayPost 
@@ -88,7 +89,7 @@ const _composeMainContentShort = () => {
   )
 
   const formattedProducts = products
-    .map((product) => composeProduct(product))
+    .map((product) => composeProduct(product, false))
     .join('\n')
 
   let content = isMiddayPost
@@ -114,8 +115,9 @@ const composeMainContent = () => {
 // =============================================================================
 
 const _composeDetailContentLong = (product) => {
-  const { name, description, url, rank, votesCount } = product
-  return `${rankToNumberEmoji(rank)} ${name} ${rankToMedalEmoji(rank)}
+  const { name, description, url, rank, votesCount, user } = product
+  const twitterHandle = user?.twitterUsername ? ` by @${user.twitterUsername}` : ''
+  return `${rankToNumberEmoji(rank)} ${name}${twitterHandle} ${rankToMedalEmoji(rank)}
 🔼 ${votesCount}
 
 ${description}
@@ -124,8 +126,9 @@ ${url}`
 }
 
 const _composeDetailContentShort = (product) => {
-  const { name, tagline, url, rank, votesCount } = product
-  return `${rankToNumberEmoji(rank)} ${name} ${rankToMedalEmoji(rank)}
+  const { name, tagline, url, rank, votesCount, user } = product
+  const twitterHandle = user?.twitterUsername ? ` by @${user.twitterUsername}` : ''
+  return `${rankToNumberEmoji(rank)} ${name}${twitterHandle} ${rankToMedalEmoji(rank)}
 🔼 ${votesCount}
 
 ${tagline}
@@ -134,10 +137,24 @@ ${url}`
 }
 
 const composeDetailContent = (product) => {
-  if (_composeDetailContentLong(product).length > 280) {
-    return _composeDetailContentShort(product)
+  const longContent = _composeDetailContentLong(product)
+  if (longContent.length <= 280) {
+    return longContent
   }
-  return _composeDetailContentLong(product)
+  
+  const shortContent = _composeDetailContentShort(product)
+  if (shortContent.length <= 280) {
+    return shortContent
+  }
+  
+  // If even short content is too long, create version without Twitter handle
+  const { name, tagline, url, rank, votesCount } = product
+  return `${rankToNumberEmoji(rank)} ${name} ${rankToMedalEmoji(rank)}
+🔼 ${votesCount}
+
+${tagline}
+
+${url}`
 }
 
 // =============================================================================

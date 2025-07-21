@@ -75,6 +75,7 @@ const res = await fetch('https://api.producthunt.com/v2/api/graphql', {
                 user {
                   name
                   profileImage
+                  twitterUsername
                 }
                 media {
                   type
@@ -133,6 +134,7 @@ if (isMiddayPost && (!json.data?.posts?.edges || json.data.posts.edges.length ==
                 user {
                   name
                   profileImage
+                  twitterUsername
                 }
                 media {
                   type
@@ -170,6 +172,7 @@ const products = (json.data?.posts?.edges || [])
       user: {
         name: product.user?.name,
         profileImage: product.user?.profileImage,
+        twitterUsername: product.user?.twitterUsername,
       },
       images: selectThreeImages(
         product.media
