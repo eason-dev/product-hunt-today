@@ -14,7 +14,7 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 const isMiddayPost = process.env.MIDDAY_POST === 'true'
-const dataFile = isMiddayPost ? 'midday.json' : 'today.json'
+const dataFile = isMiddayPost ? 'midday.json' : 'yesterday.json'
 const data = JSON.parse(fs.readFileSync(path.resolve(__dirname, `../data/${dataFile}`), 'utf-8'))
 
 const keycap = '\uFE0F\u20E3'
@@ -152,7 +152,7 @@ async function run() {
     accessSecret: process.env.TWITTER_ACCESS_TOKEN_SECRET,
   })
 
-  const videoFile = isMiddayPost ? 'midday-video.mp4' : 'video.mp4'
+  const videoFile = isMiddayPost ? 'midday-video.mp4' : 'yesterday-video.mp4'
   const mediaIdVideo = await client.v1.uploadMedia(
     path.resolve(__dirname, `../out/${videoFile}`),
     { type: 'longmp4' }

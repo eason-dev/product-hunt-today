@@ -187,7 +187,7 @@ const result = {
 }
 console.log(result)
 
-const filename = isMiddayPost ? 'midday.json' : 'today.json'
+const filename = isMiddayPost ? 'midday.json' : 'yesterday.json'
 fs.writeFileSync(
   path.resolve(__dirname, `../data/${filename}`),
   await prettier.format(JSON.stringify(result), { parser: 'json' })

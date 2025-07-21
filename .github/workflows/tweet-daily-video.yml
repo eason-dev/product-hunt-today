@@ -28,16 +28,16 @@ jobs:
       - run: sudo apt install ffmpeg
       - run: mkdir -p data
       - run: pnpm install --frozen-lockfile
-      - run: pnpm run fetch
+      - run: pnpm run fetch:yesterday
       - name: Verify data file exists
         run: |
-          if [ ! -f data/today.json ]; then
-            echo "Error: data/today.json not found after fetch"
+          if [ ! -f data/yesterday.json ]; then
+            echo "Error: data/yesterday.json not found after fetch"
             exit 1
           fi
-      - run: pnpm build
+      - run: pnpm run build:yesterday
       - run: pnpm post-tweet
       - uses: actions/upload-artifact@v4
         with:
-          name: video.mp4
-          path: out/video.mp4
+          name: yesterday-video.mp4
+          path: out/yesterday-video.mp4

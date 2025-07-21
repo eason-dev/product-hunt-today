@@ -12,7 +12,7 @@ export default function useProductHuntData() {
   if (isMiddayPost) {
     data = require("../../data/midday.json");
   } else {
-    data = require("../../data/today.json");
+    data = require("../../data/yesterday.json");
   }
 
   const { products, date } = data;

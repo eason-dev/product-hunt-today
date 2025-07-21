@@ -7,5 +7,5 @@ dist
 out
 
 # Product Hunt API script result json
-today.json
+yesterday.json
 midday.json
