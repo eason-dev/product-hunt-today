@@ -4,6 +4,13 @@
 
 A Twitter bot [@ProductHunToday](https://twitter.com/ProductHunToday) that tweets trending [Product Hunt](https://www.producthunt.com/) products every day, in short video!
 
+## Features
+
+- 🎬 **Daily video summaries** of top 5 Product Hunt products
+- 🕐 **Twice daily posts**: End-of-day summary (00:05 PST) and mid-day trending (12:00 PST)
+- 📱 **Square video format** (720x720) optimized for Twitter
+- 🤖 **Fully automated** via GitHub Actions
+
 ## Tech stack
 
 - [Remotion v4](https://www.remotion.dev/): Generate short video in React!
@@ -48,10 +55,13 @@ TWITTER_ACCESS_TOKEN_SECRET="<your-key>"
 
 ### Fetch products
 
-This will call Product Hunt API, and store result in `<ProjectRoot>/data/today.json`
+This will call Product Hunt API, and store result in data files
 
 ```console
-pnpm fetch
+pnpm fetch          # Stores in data/today.json
+
+# For mid-day post (shows "Trending Now" instead of "Yesterday's Top 5")
+pnpm fetch:midday    # Stores in data/midday.json
 ```
 
 ### Start preview
@@ -64,24 +74,33 @@ pnpm start
 
 ### Render video
 
-This will store generated video in `<ProjectRoot>/out/video.mp4`
+This will store generated videos in the out directory
 
 ```console
-pnpm build
+pnpm build          # Outputs to out/video.mp4
+
+# For mid-day post
+pnpm build:midday    # Outputs to out/midday-video.mp4
 ```
 
 ### Post to Twitter
 
 ```console
 pnpm post-tweet
+
+# For mid-day post
+pnpm post-tweet:midday
 ```
 
 ### Run tests
 
 ```console
-pnpm test  # Run linting and type checking
-pnpm lint  # Run ESLint only
+pnpm test      # Run linting and type checking
+pnpm lint      # Run ESLint only
 pnpm lint:fix  # Fix ESLint issues
+
+# Run complete mid-day workflow (fetch + build + post)
+pnpm midday
 ```
 
 ## Contribute

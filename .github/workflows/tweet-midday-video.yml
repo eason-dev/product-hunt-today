@@ -28,16 +28,16 @@ jobs:
       - run: sudo apt install ffmpeg
       - run: mkdir -p data
       - run: pnpm install --frozen-lockfile
-      - run: MIDDAY_POST=true pnpm run fetch
+      - run: pnpm run fetch:midday
       - name: Verify data file exists
         run: |
-          if [ ! -f data/today.json ]; then
-            echo "Error: data/today.json not found after fetch"
+          if [ ! -f data/midday.json ]; then
+            echo "Error: data/midday.json not found after fetch"
             exit 1
           fi
-      - run: MIDDAY_POST=true pnpm build
-      - run: MIDDAY_POST=true pnpm post-tweet
+      - run: pnpm run build:midday
+      - run: pnpm run post-tweet:midday
       - uses: actions/upload-artifact@v4
         with:
           name: midday-video.mp4
-          path: out/video.mp4
+          path: out/midday-video.mp4

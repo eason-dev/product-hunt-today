@@ -15,7 +15,11 @@
 		"server": "ts-node server.tsx",
 		"test": "eslint src --ext ts,tsx,js,jsx && tsc",
 		"fetch": "zx scripts/fetchProductHunt.mjs",
+		"fetch:midday": "MIDDAY_POST=true zx scripts/fetchProductHunt.mjs",
+		"build:midday": "MIDDAY_POST=true remotion render src/index.tsx ProductHuntToday out/midday-video.mp4 --timeout 1000000",
 		"post-tweet": "zx scripts/postTweet.mjs",
+		"post-tweet:midday": "MIDDAY_POST=true zx scripts/postTweet.mjs",
+		"midday": "pnpm run fetch:midday && pnpm run build:midday && pnpm run post-tweet:midday",
 		"lint": "eslint src --ext ts,tsx,js,jsx",
 		"lint:fix": "eslint src --ext ts,tsx,js,jsx --fix"
 	},

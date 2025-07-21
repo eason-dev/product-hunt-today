@@ -1,13 +1,21 @@
-import dataFile from "../../data/today.json";
-
-// Type assertion to handle optional isMiddayPost
-const data = dataFile as {
-  date: string;
-  products: any[];
-  isMiddayPost?: boolean;
-};
-
 export default function useProductHuntData() {
-  const { products, date, isMiddayPost = false } = data;
+  // Use environment variable to determine if this is a midday post
+  const isMiddayPost = process.env.MIDDAY_POST === "true";
+  
+  // Import the correct data file
+  let data: {
+    date: string;
+    products: any[];
+    isMiddayPost?: boolean;
+  };
+
+  if (isMiddayPost) {
+    data = require("../../data/midday.json");
+  } else {
+    data = require("../../data/today.json");
+  }
+
+  const { products, date } = data;
+  // Use the environment variable to determine isMiddayPost, not the data file
   return { products, date, isMiddayPost };
 }

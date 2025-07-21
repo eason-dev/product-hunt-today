@@ -12,10 +12,7 @@ export const ProductHuntToday = () => {
 
   return (
     <div
-      style={{
-        flex: 1,
-        background: "linear-gradient(135deg, #da5630 0%, #e91e63 100%)",
-      }}
+      style={{ flex: 1, backgroundColor: isMiddayPost ? "#cc4125" : "#da5630" }}
     >
       {/* Background */}
       <Sequence from={0} durationInFrames={videoConfig.durationInFrames}>
