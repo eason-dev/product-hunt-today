@@ -115,24 +115,28 @@ const composeMainContent = () => {
 // =============================================================================
 
 const _composeDetailContentLong = (product) => {
-  const { name, description, url, rank, votesCount, user } = product
+  const { name, description, url, rank, votesCount, user, topics } = product
   const twitterHandle = user?.twitterUsername ? ` by @${user.twitterUsername}` : ''
+  const hashtags = topics?.slice(0, 2).map(topic => `#${topic.replace(/\s+/g, '')}`).join(' ') || ''
   return `${rankToNumberEmoji(rank)} ${name}${twitterHandle} ${rankToMedalEmoji(rank)}
 🔼 ${votesCount}
 
 ${description}
 
+${hashtags}
 ${url}`
 }
 
 const _composeDetailContentShort = (product) => {
-  const { name, tagline, url, rank, votesCount, user } = product
+  const { name, tagline, url, rank, votesCount, user, topics } = product
   const twitterHandle = user?.twitterUsername ? ` by @${user.twitterUsername}` : ''
+  const hashtags = topics?.slice(0, 2).map(topic => `#${topic.replace(/\s+/g, '')}`).join(' ') || ''
   return `${rankToNumberEmoji(rank)} ${name}${twitterHandle} ${rankToMedalEmoji(rank)}
 🔼 ${votesCount}
 
 ${tagline}
 
+${hashtags}
 ${url}`
 }
 
@@ -148,12 +152,14 @@ const composeDetailContent = (product) => {
   }
   
   // If even short content is too long, create version without Twitter handle
-  const { name, tagline, url, rank, votesCount } = product
+  const { name, tagline, url, rank, votesCount, topics } = product
+  const hashtags = topics?.slice(0, 1).map(topic => `#${topic.replace(/\s+/g, '')}`).join(' ') || ''
   return `${rankToNumberEmoji(rank)} ${name} ${rankToMedalEmoji(rank)}
 🔼 ${votesCount}
 
 ${tagline}
 
+${hashtags}
 ${url}`
 }
 
