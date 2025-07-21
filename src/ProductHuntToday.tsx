@@ -8,13 +8,18 @@ import useProductHuntData from "./hooks/useProductHuntData";
 
 export const ProductHuntToday = () => {
   const videoConfig = useVideoConfig();
-  const { products, date } = useProductHuntData();
+  const { products, date, isMiddayPost } = useProductHuntData();
 
   return (
-    <div style={{ flex: 1, backgroundColor: "#da5630" }}>
+    <div
+      style={{
+        flex: 1,
+        background: "linear-gradient(135deg, #da5630 0%, #e91e63 100%)",
+      }}
+    >
       {/* Background */}
       <Sequence from={0} durationInFrames={videoConfig.durationInFrames}>
-        <BaseBackground date={date} />
+        <BaseBackground date={date} isMiddayPost={isMiddayPost} />
       </Sequence>
 
       {/* ProductList */}

@@ -10,8 +10,8 @@ export const RemotionVideo = () => {
         component={ProductHuntToday}
         durationInFrames={1050}
         fps={30}
-        width={720}
-        height={720}
+        width={1080}
+        height={1920}
       />
     </>
   );

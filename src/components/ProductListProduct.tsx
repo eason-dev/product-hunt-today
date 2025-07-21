@@ -24,25 +24,39 @@ export const ProductListProduct = ({ product, transitionStart }) => {
 
   return (
     <div
-      className="flex items-center justify-between gap-4"
+      className="mb-8 flex items-center justify-between gap-6"
       style={{ opacity: opacity, transform: `translateY(${translate}px)` }}
     >
-      <div className="flex items-center gap-3">
-        <Rank rank={product.rank} />
-        <Image src={product.thumbnail} className="h-14 w-14" />
+      <div className="flex items-center gap-5">
+        <Rank rank={product.rank} delay={transitionStart} />
+        <div className="relative">
+          <Image
+            src={product.thumbnail}
+            className="h-20 w-20 rounded-xl"
+            style={{
+              boxShadow: "0 0 15px rgba(218, 86, 48, 0.2)",
+            }}
+          />
+        </div>
 
         <div>
-          <h2 className="line-clamp-2 text-3xl leading-8 font-medium text-gray-800">
+          <h2 className="line-clamp-2 text-4xl leading-10 font-medium text-gray-800">
             {product.name}
           </h2>
-          <h3 className="line-clamp-2 text-2xl leading-7 text-gray-700">
+          <h3 className="line-clamp-2 text-3xl leading-8 text-gray-600">
             {product.tagline}
           </h3>
         </div>
       </div>
-      <div className="flex flex-col rounded border-2 border-gray-200 px-2 py-1 text-center text-gray-800">
-        <p className="text-xl font-semibold">▲</p>
-        <p className="text-xl font-semibold">{product.votesCount}</p>
+      <div
+        className="flex flex-col rounded-lg px-3 py-2 text-center text-white"
+        style={{
+          background: "linear-gradient(135deg, #f64900 0%, #e91e63 100%)",
+          boxShadow: "0 3px 10px 0 rgba(246, 73, 0, 0.3)",
+        }}
+      >
+        <p className="text-2xl font-semibold">▲</p>
+        <p className="text-2xl font-semibold">{product.votesCount}</p>
       </div>
     </div>
   );

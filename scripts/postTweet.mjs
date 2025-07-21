@@ -47,7 +47,7 @@ const composeProduct = (product) => {
 // =============================================================================
 
 const _composeMainContentLong = () => {
-  const { products, date } = data
+  const { products, date, isMiddayPost = false } = data
   const formattedDate = formatInTimeZone(
     new Date(date),
     'America/Los_Angeles',
@@ -58,7 +58,15 @@ const _composeMainContentLong = () => {
     .map((product) => composeProduct(product))
     .join('\n')
 
-  let content = `🔥 Top 5 on Product Hunt yesterday
+  let content = isMiddayPost 
+    ? `🚀 Top 5 Trending on Product Hunt RIGHT NOW
+⏰ ${formatInTimeZone(new Date(), 'America/Los_Angeles', 'h:mm a zzz')} #ProductHunt
+
+${formattedProducts}
+
+🧵 Detail & links in the thread 👇
+`
+    : `🔥 Top 5 on Product Hunt yesterday
 📅 ${formattedDate} #ProductHunt
 
 ${formattedProducts}
@@ -70,7 +78,7 @@ ${formattedProducts}
 }
 
 const _composeMainContentShort = () => {
-  const { products, date } = data
+  const { products, date, isMiddayPost = false } = data
   const formattedDate = formatInTimeZone(
     new Date(date),
     'America/Los_Angeles',
@@ -81,7 +89,12 @@ const _composeMainContentShort = () => {
     .map((product) => composeProduct(product))
     .join('\n')
 
-  let content = `🔥 Top 5 on Product Hunt yesterday
+  let content = isMiddayPost
+    ? `🚀 Top 5 Trending on Product Hunt NOW
+⏰ ${formatInTimeZone(new Date(), 'America/Los_Angeles', 'h:mm a')} #ProductHunt
+
+${formattedProducts}`
+    : `🔥 Top 5 on Product Hunt yesterday
 📅 ${formattedDate} #ProductHunt
 
 ${formattedProducts}`

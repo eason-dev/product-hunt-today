@@ -1,0 +1,43 @@
+name: Tweet Midday Video
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 20 * * *" # Daily at 12:00 PM Pacific Time (20:00 UTC)
+
+env:
+  REACT_APP_PRODUCT_HUNT_API_KEY: ${{ secrets.REACT_APP_PRODUCT_HUNT_API_KEY }}
+  TWITTER_CONSUMER_KEY: ${{ secrets.TWITTER_CONSUMER_KEY }}
+  TWITTER_CONSUMER_SECRET: ${{ secrets.TWITTER_CONSUMER_SECRET }}
+  TWITTER_ACCESS_TOKEN_KEY: ${{ secrets.TWITTER_ACCESS_TOKEN_KEY }}
+  TWITTER_ACCESS_TOKEN_SECRET: ${{ secrets.TWITTER_ACCESS_TOKEN_SECRET }}
+
+jobs:
+  render:
+    name: Tweet Midday Video
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.13.1
+      - run: sudo apt update
+      - run: sudo apt install ffmpeg
+      - run: mkdir -p data
+      - run: pnpm install --frozen-lockfile
+      - run: MIDDAY_POST=true pnpm run fetch
+      - name: Verify data file exists
+        run: |
+          if [ ! -f data/today.json ]; then
+            echo "Error: data/today.json not found after fetch"
+            exit 1
+          fi
+      - run: MIDDAY_POST=true pnpm build
+      - run: MIDDAY_POST=true pnpm post-tweet
+      - uses: actions/upload-artifact@v4
+        with:
+          name: midday-video.mp4
+          path: out/video.mp4

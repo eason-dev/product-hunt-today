@@ -21,18 +21,26 @@ export const ProductDetailProduct = ({ product }) => {
 
   return (
     <div style={{ opacity: opacity, transform: `translateY(${translate}px)` }}>
-      <div className="mb-3 flex items-center justify-between gap-4">
-        <div className="flex flex-grow items-center gap-4 overflow-hidden">
-          <Image src={thumbnail} className="h-20 w-20" />
+      <div className="mb-6 flex items-center justify-between gap-6">
+        <div className="flex flex-grow items-center gap-6 overflow-hidden">
+          <div className="relative">
+            <Image
+              src={thumbnail}
+              className="h-28 w-28 rounded-2xl"
+              style={{
+                boxShadow: "0 0 20px rgba(218, 86, 48, 0.3)",
+              }}
+            />
+          </div>
           <div className="flex-grow">
-            <h2 className="mb-1 line-clamp-2 text-3xl leading-8 font-medium text-gray-800">
+            <h2 className="mb-2 line-clamp-2 text-4xl leading-10 font-medium text-gray-800">
               {name}
             </h2>
             <div className="overflow-fadeout-right flex items-center gap-1">
               {topics.map((topic) => (
                 <span
                   key={topic}
-                  className="box-border flex-shrink-0 rounded border border-gray-400 bg-gray-50 px-2 py-1 text-sm text-gray-500"
+                  className="box-border flex-shrink-0 rounded-lg border border-gray-400 bg-gray-50 px-3 py-1.5 text-base text-gray-500"
                 >
                   {topic}
                 </span>
@@ -42,16 +50,28 @@ export const ProductDetailProduct = ({ product }) => {
         </div>
 
         <div className="flex flex-col items-end gap-2">
-          <Rank rank={rank} />
-          <div className="flex gap-2 rounded border border-[#db4200] bg-[#f64900] px-2 py-1 text-center text-white">
-            <p className="text-xl font-semibold">▲</p>
-            <p className="text-xl font-semibold">{votesCount}</p>
+          <Rank rank={rank} delay={0} />
+          <div
+            className="flex gap-2 rounded-lg px-3 py-2 text-center text-white"
+            style={{
+              background: "linear-gradient(135deg, #f64900 0%, #e91e63 100%)",
+              boxShadow: "0 4px 15px 0 rgba(246, 73, 0, 0.4)",
+            }}
+          >
+            <p className="text-2xl font-semibold">▲</p>
+            <p className="text-2xl font-semibold">
+              {Math.floor(
+                interpolate(frame, [0, 30], [0, votesCount], {
+                  extrapolateRight: "clamp",
+                }),
+              )}
+            </p>
           </div>
         </div>
       </div>
 
-      <div className="mb-3">
-        <p className="line-clamp-3 text-2xl leading-7 text-gray-700">
+      <div className="mb-6">
+        <p className="line-clamp-4 text-3xl leading-9 text-gray-700">
           {description}
         </p>
       </div>

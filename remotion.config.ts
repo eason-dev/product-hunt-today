@@ -17,8 +17,11 @@ Config.overrideWebpackConfig((currentConfiguration) => {
           if (rule === '...') {
             return false
           }
-          if (rule.test?.toString().includes('.css')) {
-            return false
+          if (typeof rule === 'object' && rule !== null && 'test' in rule) {
+            const test = rule.test
+            if (test && test.toString().includes('.css')) {
+              return false
+            }
           }
           return true
         }),

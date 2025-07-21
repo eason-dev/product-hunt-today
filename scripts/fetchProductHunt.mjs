@@ -18,13 +18,31 @@ const selectThreeImages = (images) => {
   if (images.length < 1) {
     return []
   }
+  
+  // Single image: use it once (carousel will handle display)
   if (images.length === 1) {
-    return [images[0], images[0], images[0]]
+    return [images[0]]
   }
+  
+  // Two images: show both
   if (images.length === 2) {
-    return [images[0], images[1], images[0]]
+    return [images[0], images[1]]
   }
-  return [images[0], images[1], images[2]]
+  
+  // Three or more: intelligently select the best 3
+  if (images.length === 3) {
+    return images
+  }
+  
+  // More than 3: select diverse images
+  // Try to get images from different positions (start, middle, end)
+  const selectedIndices = [
+    0, // First image
+    Math.floor(images.length / 2), // Middle image
+    images.length - 1 // Last image
+  ]
+  
+  return selectedIndices.map(i => images[i])
 }
 
 // For product detail carousel images, reduce image file size & video build time
@@ -36,12 +54,26 @@ const constructImgixParameter = (src) => {
   return url.toString()
 }
 
-const dateArg =
-  argv['_']?.[1] || new Date().setUTCDate(new Date().getUTCDate() - 1)
-const postedAfterDate = new Date(dateArg)
-postedAfterDate.setUTCHours(-8, 0, 0, 0) // Pacific Time (-8)
-const postedBeforeDate = new Date(postedAfterDate)
-postedBeforeDate.setUTCDate(postedAfterDate.getUTCDate() + 1)
+const isMiddayPost = process.env.MIDDAY_POST === 'true'
+
+let postedAfterDate, postedBeforeDate
+
+if (isMiddayPost) {
+  // For midday posts, fetch today's products
+  const today = new Date()
+  postedAfterDate = new Date(today)
+  postedAfterDate.setUTCHours(-8, 0, 0, 0) // Pacific Time (-8)
+  postedBeforeDate = new Date(postedAfterDate)
+  postedBeforeDate.setUTCDate(postedAfterDate.getUTCDate() + 1)
+} else {
+  // For end-of-day posts, fetch yesterday's products
+  const dateArg =
+    argv['_']?.[1] || new Date().setUTCDate(new Date().getUTCDate() - 1)
+  postedAfterDate = new Date(dateArg)
+  postedAfterDate.setUTCHours(-8, 0, 0, 0) // Pacific Time (-8)
+  postedBeforeDate = new Date(postedAfterDate)
+  postedBeforeDate.setUTCDate(postedAfterDate.getUTCDate() + 1)
+}
 
 const res = await fetch('https://api.producthunt.com/v2/api/graphql', {
   method: 'POST',
@@ -114,7 +146,11 @@ const products = json.data.posts.edges
     }
   })
 
-const result = { date: postedBeforeDate.toISOString(), products: products }
+const result = { 
+  date: postedBeforeDate.toISOString(), 
+  products: products,
+  isMiddayPost: isMiddayPost 
+}
 console.log(result)
 
 fs.writeFileSync(
