@@ -11,7 +11,7 @@ export const EnhancedBaseBackground = ({ date, isMiddayPost = false }) => {
     const gradientStops = [];
 
     for (let i = 0; i <= 100; i += 10) {
-      const noiseValue = noise2D("seed", i, frame * 0.01) * 0.08; // Subtle noise animation
+      const noiseValue = noise2D("seed", i, frame * 0.01) * 0.12; // Balanced noise animation
       const lightness = 0.5 + noiseValue;
       gradientStops.push(
         `hsl(${isMiddayPost ? 13 : 16}, 62%, ${lightness * 100}%) ${i}%`,
