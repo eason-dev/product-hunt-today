@@ -2,6 +2,7 @@ import { interpolate, useCurrentFrame } from "remotion";
 
 import { Image } from "./Image";
 import { Rank } from "./Rank";
+import { fontStyles } from "./GoogleFonts";
 
 export const ProductListProduct = ({ product, transitionStart }) => {
   const frame = useCurrentFrame();
@@ -29,13 +30,19 @@ export const ProductListProduct = ({ product, transitionStart }) => {
     >
       <div className="flex items-center gap-3">
         <Rank rank={product.rank} />
-        <Image src={product.thumbnail} className="h-14 w-14" />
+        <Image src={product.thumbnail} className="h-14 w-14 rounded-lg" />
 
         <div>
-          <h2 className="line-clamp-2 text-3xl leading-8 font-medium text-gray-800">
+          <h2
+            className="line-clamp-2 text-3xl leading-8 font-medium text-gray-800"
+            style={fontStyles.productName}
+          >
             {product.name}
           </h2>
-          <h3 className="line-clamp-2 text-2xl leading-7 text-gray-700">
+          <h3
+            className="line-clamp-2 text-2xl leading-7 text-gray-700"
+            style={fontStyles.productTagline}
+          >
             {product.tagline}
           </h3>
         </div>

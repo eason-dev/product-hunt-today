@@ -12,7 +12,7 @@ export const ProductHuntToday = () => {
 
   return (
     <div
-      style={{ flex: 1, backgroundColor: isMiddayPost ? "#cc4125" : "#da5630" }}
+      style={{ flex: 1, backgroundColor: isMiddayPost ? "#e74c3c" : "#da5630" }}
     >
       {/* Background */}
       <Sequence from={0} durationInFrames={videoConfig.durationInFrames}>
