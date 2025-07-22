@@ -30,8 +30,8 @@ export const EnhancedImagesCarousel = ({ images }: { images: string[] }) => {
   const currentTranslate = frame < 110 ? translate1 : translate2;
   // Calculate motion blur intensity based on transition state
   const isTransitioning =
-    (frame > 50 && frame < 58) || (frame > 110 && frame < 118);
-  const shutterAngle = isTransitioning ? 180 : 0.1; // Use 0.1 instead of 0 to avoid array length issues
+    (frame > 45 && frame < 65) || (frame > 105 && frame < 125); // Wider transition window
+  const shutterAngle = isTransitioning ? 270 : 0.1; // Higher angle for more noticeable blur
 
   return (
     <div className="relative aspect-[16/9] overflow-hidden">

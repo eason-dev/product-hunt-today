@@ -11,7 +11,7 @@ export const EnhancedBaseBackground = ({ date, isMiddayPost = false }) => {
     const gradientStops = [];
 
     for (let i = 0; i <= 100; i += 10) {
-      const noiseValue = noise2D("seed", i, frame * 0.01) * 0.1;
+      const noiseValue = noise2D("seed", i, frame * 0.02) * 0.15; // More visible noise animation
       const lightness = 0.5 + noiseValue;
       gradientStops.push(
         `hsl(${isMiddayPost ? 13 : 16}, 62%, ${lightness * 100}%) ${i}%`,
@@ -28,10 +28,13 @@ export const EnhancedBaseBackground = ({ date, isMiddayPost = false }) => {
     >
       <div className="relative flex h-full w-full flex-col rounded-xl bg-white p-4">
         <h1
-          className="text-center text-4xl font-bold"
+          className={`text-center font-bold ${
+            isMiddayPost ? "text-3xl" : "text-4xl"
+          }`}
           style={{
             color: isMiddayPost ? "#cc4125" : "#da5630",
             ...fontStyles.heading,
+            lineHeight: 1.2,
           }}
         >
           {isMiddayPost
