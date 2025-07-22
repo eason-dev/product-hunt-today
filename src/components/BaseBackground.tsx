@@ -14,7 +14,7 @@ export const BaseBackground = ({ date, isMiddayPost = false }) => {
       const noiseValue = noise2D("seed", i, frame * 0.01) * 0.12; // Balanced noise animation
       const lightness = 0.5 + noiseValue;
       gradientStops.push(
-        `hsl(${isMiddayPost ? 13 : 16}, 62%, ${lightness * 100}%) ${i}%`,
+        `hsl(${isMiddayPost ? 6 : 16}, ${isMiddayPost ? 74 : 62}%, ${lightness * 100}%) ${i}%`,
       );
     }
 
@@ -32,7 +32,7 @@ export const BaseBackground = ({ date, isMiddayPost = false }) => {
             isMiddayPost ? "text-3xl" : "text-4xl"
           }`}
           style={{
-            color: isMiddayPost ? "#cc4125" : "#da5630",
+            color: isMiddayPost ? "#e74c3c" : "#da5630",
             ...fontStyles.heading,
             lineHeight: 1.2,
           }}
