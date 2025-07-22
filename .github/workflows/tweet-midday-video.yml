@@ -1,7 +1,13 @@
-name: Tweet Midday Video
+name: Midday Post - Today's Trending Products
 
 on:
   workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Run without posting to Twitter'
+        required: false
+        default: false
+        type: boolean
   schedule:
     - cron: "0 20 * * *" # Daily at 12:00 PM Pacific Time (20:00 UTC)
 
@@ -14,7 +20,7 @@ env:
 
 jobs:
   render:
-    name: Tweet Midday Video
+    name: Build and Post Today's Trending Products
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -38,7 +44,12 @@ jobs:
             exit 1
           fi
       - run: pnpm run build:midday
-      - run: pnpm run post-tweet:midday
+      - name: Post to Twitter
+        if: ${{ !inputs.dry_run }}
+        run: pnpm run post-tweet:midday
+      - name: Skip Twitter post (dry run)
+        if: ${{ inputs.dry_run }}
+        run: echo "Dry run mode - skipping Twitter post"
       - uses: actions/upload-artifact@v4
         with:
           name: midday-video.mp4

@@ -1,9 +1,15 @@
-name: Tweet Daily Video
+name: Daily Morning Post - Yesterday's Top Products
 
 on:
   workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Run without posting to Twitter'
+        required: false
+        default: false
+        type: boolean
   schedule:
-    - cron: "5 8 * * *" # Daily (00:05 every day in Pacific Timezone)
+    - cron: "5 8 * * *" # Daily at 00:05 Pacific Time (08:05 UTC)
 
 env:
   REACT_APP_PRODUCT_HUNT_API_KEY: ${{ secrets.REACT_APP_PRODUCT_HUNT_API_KEY }}
@@ -14,7 +20,7 @@ env:
 
 jobs:
   render:
-    name: Tweet Daily Video
+    name: Build and Post Yesterday's Products
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -38,7 +44,12 @@ jobs:
             exit 1
           fi
       - run: pnpm run build:yesterday
-      - run: pnpm post-tweet
+      - name: Post to Twitter
+        if: ${{ !inputs.dry_run }}
+        run: pnpm post-tweet
+      - name: Skip Twitter post (dry run)
+        if: ${{ inputs.dry_run }}
+        run: echo "Dry run mode - skipping Twitter post"
       - uses: actions/upload-artifact@v4
         with:
           name: yesterday-video.mp4
