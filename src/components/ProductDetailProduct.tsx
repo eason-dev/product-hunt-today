@@ -22,21 +22,21 @@ export const ProductDetailProduct = ({ product }) => {
 
   return (
     <div style={{ opacity: opacity, transform: `translateY(${translate}px)` }}>
-      <div className="mb-3 flex items-center justify-between gap-4">
-        <div className="flex flex-grow items-center gap-4 overflow-hidden">
-          <Image src={thumbnail} className="h-20 w-20 rounded-xl" />
+      <div className="mb-6 flex items-center justify-between gap-8">
+        <div className="flex flex-grow items-center gap-8 overflow-hidden">
+          <Image src={thumbnail} className="h-40 w-40 rounded-2xl" />
           <div className="flex-grow">
             <h2
-              className="mb-1 line-clamp-2 text-3xl leading-8 font-medium text-gray-800"
+              className="mb-2 line-clamp-2 text-6xl leading-tight font-medium text-gray-800"
               style={fontStyles.productName}
             >
               {name}
             </h2>
-            <div className="overflow-fadeout-right flex items-center gap-1">
+            <div className="overflow-fadeout-right flex items-center gap-2">
               {topics.map((topic) => (
                 <span
                   key={topic}
-                  className="box-border flex-shrink-0 rounded border border-gray-400 bg-gray-50 px-2 py-1 text-sm text-gray-500"
+                  className="box-border flex-shrink-0 rounded-lg border-2 border-gray-400 bg-gray-50 px-4 py-2 text-2xl text-gray-500"
                 >
                   {topic}
                 </span>
@@ -45,18 +45,18 @@ export const ProductDetailProduct = ({ product }) => {
           </div>
         </div>
 
-        <div className="flex flex-col items-end gap-2">
+        <div className="flex flex-col items-end gap-4">
           <Rank rank={rank} />
-          <div className="flex gap-2 rounded border border-[#db4200] bg-[#f64900] px-2 py-1 text-center text-white">
-            <p className="text-xl font-semibold">▲</p>
-            <p className="text-xl font-semibold">{votesCount}</p>
+          <div className="flex gap-4 rounded-lg border-4 border-[#db4200] bg-[#f64900] px-4 py-2 text-center text-white">
+            <p className="text-4xl font-semibold">▲</p>
+            <p className="text-4xl font-semibold">{votesCount}</p>
           </div>
         </div>
       </div>
 
-      <div className="mb-3">
+      <div className="mb-6">
         <p
-          className="line-clamp-3 text-2xl leading-7 text-gray-700"
+          className="line-clamp-3 text-4xl leading-normal text-gray-700"
           style={fontStyles.body}
         >
           {description}
