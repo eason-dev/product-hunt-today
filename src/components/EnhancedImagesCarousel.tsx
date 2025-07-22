@@ -2,7 +2,7 @@ import { spring, useCurrentFrame, useVideoConfig } from "remotion";
 import { CameraMotionBlur } from "@remotion/motion-blur";
 import { Image } from "./Image";
 
-export const EnhancedImagesCarousel = ({ images }) => {
+export const EnhancedImagesCarousel = ({ images }: { images: string[] }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
 
@@ -31,7 +31,7 @@ export const EnhancedImagesCarousel = ({ images }) => {
   // Calculate motion blur intensity based on transition state
   const isTransitioning =
     (frame > 50 && frame < 58) || (frame > 110 && frame < 118);
-  const shutterAngle = isTransitioning ? 180 : 0;
+  const shutterAngle = isTransitioning ? 180 : 0.1; // Use 0.1 instead of 0 to avoid array length issues
 
   return (
     <div className="relative aspect-[16/9] overflow-hidden">
