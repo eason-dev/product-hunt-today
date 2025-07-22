@@ -35,7 +35,8 @@ jobs:
       - run: mkdir -p data
       - run: pnpm install --frozen-lockfile
       - name: Create placeholder midday.json for webpack
-        run: echo '{"date": "", "products": []}' > data/midday.json
+        run: |
+          echo '{"date": "", "products": []}' > data/midday.json
       - run: pnpm run fetch:yesterday
       - name: Verify data file exists
         run: |
