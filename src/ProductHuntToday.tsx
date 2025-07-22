@@ -1,6 +1,6 @@
 import { Sequence, useVideoConfig } from "remotion";
 
-import { EnhancedBaseBackground } from "./components/EnhancedBaseBackground";
+import { BaseBackground } from "./components/BaseBackground";
 import { ContentWrapper } from "./components/ContentWrapper";
 import { ProductDetail } from "./components/ProductDetail";
 import { ProductList } from "./components/ProductList";
@@ -16,7 +16,7 @@ export const ProductHuntToday = () => {
     >
       {/* Background */}
       <Sequence from={0} durationInFrames={videoConfig.durationInFrames}>
-        <EnhancedBaseBackground date={date} isMiddayPost={isMiddayPost} />
+        <BaseBackground date={date} isMiddayPost={isMiddayPost} />
       </Sequence>
 
       {/* ProductList */}

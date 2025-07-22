@@ -1,7 +1,7 @@
 import { interpolate, useCurrentFrame } from "remotion";
 
 import { Image } from "./Image";
-import { EnhancedImagesCarousel } from "./EnhancedImagesCarousel";
+import { ImagesCarousel } from "./ImagesCarousel";
 import { Rank } from "./Rank";
 import { fontStyles } from "./GoogleFonts";
 
@@ -63,7 +63,7 @@ export const ProductDetailProduct = ({ product }) => {
         </p>
       </div>
 
-      <EnhancedImagesCarousel images={images} />
+      <ImagesCarousel images={images} />
     </div>
   );
 };
