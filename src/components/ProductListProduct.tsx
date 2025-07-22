@@ -30,7 +30,7 @@ export const ProductListProduct = ({ product, transitionStart }) => {
     >
       <div className="flex items-center gap-3">
         <Rank rank={product.rank} />
-        <Image src={product.thumbnail} className="h-14 w-14" />
+        <Image src={product.thumbnail} className="h-14 w-14 rounded-lg" />
 
         <div>
           <h2

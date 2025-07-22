@@ -24,7 +24,7 @@ export const ProductDetailProduct = ({ product }) => {
     <div style={{ opacity: opacity, transform: `translateY(${translate}px)` }}>
       <div className="mb-3 flex items-center justify-between gap-4">
         <div className="flex flex-grow items-center gap-4 overflow-hidden">
-          <Image src={thumbnail} className="h-20 w-20" />
+          <Image src={thumbnail} className="h-20 w-20 rounded-xl" />
           <div className="flex-grow">
             <h2
               className="mb-1 line-clamp-2 text-3xl leading-8 font-medium text-gray-800"
