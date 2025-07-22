@@ -17,16 +17,13 @@ Config.overrideWebpackConfig((currentConfiguration) => {
     module: {
       ...currentConfiguration.module,
       rules: [
-        ...(currentConfiguration.module?.rules
-          ? currentConfiguration.module.rules
-          : []
-        ).filter((rule) => {
+        ...(currentConfiguration.module?.rules ?? []).filter((rule) => {
           if (rule === '...') {
             return false
           }
           if (typeof rule === 'object' && rule !== null && 'test' in rule) {
             const test = rule.test
-            if (test && test.toString().includes('.css')) {
+            if (test?.toString().includes('.css')) {
               return false
             }
           }
