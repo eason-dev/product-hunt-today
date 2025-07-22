@@ -5,6 +5,9 @@ export default {
       textColor: {
         primary: '#da5630',
       },
+      fontSize: {
+        '9xl': ['8rem', { lineHeight: '1' }],
+      },
     },
   },
   plugins: [],

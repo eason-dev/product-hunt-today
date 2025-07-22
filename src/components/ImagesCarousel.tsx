@@ -34,7 +34,7 @@ export const ImagesCarousel = ({ images }: { images: string[] }) => {
   const shutterAngle = isTransitioning ? 270 : 0.1; // Higher angle for more noticeable blur
 
   return (
-    <div className="relative aspect-[16/9] overflow-hidden rounded-xl">
+    <div className="relative aspect-[16/9] overflow-hidden rounded-2xl">
       <CameraMotionBlur shutterAngle={shutterAngle} samples={8}>
         <div
           className="flex h-full w-full"

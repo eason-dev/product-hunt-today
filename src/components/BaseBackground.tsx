@@ -23,14 +23,12 @@ export const BaseBackground = ({ date, isMiddayPost = false }) => {
 
   return (
     <div
-      className="relative h-full w-full p-8"
+      className="relative h-full w-full p-16"
       style={{ background: createNoiseGradient() }}
     >
-      <div className="relative flex h-full w-full flex-col rounded-xl bg-white p-4">
+      <div className="relative flex h-full w-full flex-col rounded-2xl bg-white p-8">
         <h1
-          className={`text-center font-bold ${
-            isMiddayPost ? "text-3xl" : "text-4xl"
-          }`}
+          className="text-center text-6xl font-bold"
           style={{
             color: isMiddayPost ? "#e74c3c" : "#da5630",
             ...fontStyles.heading,
@@ -38,11 +36,11 @@ export const BaseBackground = ({ date, isMiddayPost = false }) => {
           }}
         >
           {isMiddayPost
-            ? "Top 5 Trending on Product Hunt Now"
+            ? "What's Hot on Product Hunt Now"
             : "Top 5 on Product Hunt yesterday"}
         </h1>
         <h2
-          className="text-center text-2xl text-gray-400"
+          className="text-center text-5xl text-gray-400"
           style={fontStyles.body}
         >
           {formatInTimeZone(
@@ -53,7 +51,7 @@ export const BaseBackground = ({ date, isMiddayPost = false }) => {
         </h2>
       </div>
       <span
-        className="fixed right-8 bottom-1 float-right text-xl font-light text-white"
+        className="fixed right-16 bottom-2 float-right text-4xl font-light text-white"
         style={fontStyles.body}
       >
         @ProductHunToday
