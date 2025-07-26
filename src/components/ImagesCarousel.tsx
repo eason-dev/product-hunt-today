@@ -32,10 +32,11 @@ export const ImagesCarousel = ({ images }: { images: string[] }) => {
   const isTransitioning =
     (frame > 45 && frame < 65) || (frame > 105 && frame < 125); // Wider transition window
   const shutterAngle = isTransitioning ? 270 : 0.1; // Higher angle for more noticeable blur
+  const samples = isTransitioning ? 6 : 1; // Reduce samples when not transitioning
 
   return (
     <div className="relative aspect-[16/9] overflow-hidden rounded-2xl">
-      <CameraMotionBlur shutterAngle={shutterAngle} samples={8}>
+      <CameraMotionBlur shutterAngle={shutterAngle} samples={samples}>
         <div
           className="flex h-full w-full"
           style={{

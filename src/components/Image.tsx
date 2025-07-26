@@ -2,7 +2,7 @@ import { Gif } from "@remotion/gif";
 import { Img, OffthreadVideo } from "remotion";
 
 export const Image = ({ src, ...other }) => {
-  // Handle GIF files
+  // Handle GIF files with optimized Gif component
   if (src.includes(".gif")) {
     return <Gif src={src} {...other} />;
   }
@@ -12,6 +12,6 @@ export const Image = ({ src, ...other }) => {
     return <OffthreadVideo src={src} {...other} />;
   }
 
-  // Handle regular images
+  // Handle regular images with optimized Img component
   return <Img src={src} {...other} />;
 };
